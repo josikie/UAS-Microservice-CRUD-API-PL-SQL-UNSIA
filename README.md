@@ -6,18 +6,18 @@ Midterm exam project for Pemrograman PL SQL. Group 10.
    ```
    git clone https://github.com/josikie/microservice-login.git
    ```
-3. Open project on vscode. 
+2. Open project on vscode. 
 ### Create environment variable:
 1. Install virualenv with this command:
    ```
    pip install virtualenv
    ```
-3. Open the terminal on vscode. If you use Windows, download [git bash](https://git-scm.com/downloads). Install it. Then open git bash on vscode. 
-4. Create the virtual environment with this command:
+2. Open the terminal on vscode. If you use Windows, download [git bash](https://git-scm.com/downloads). Install it. Then open git bash on vscode. 
+3. Create the virtual environment with this command:
    ```
    python -m virtualenv env
    ```
-6. Run the project in your virtual environment with this command:
+4. Run the project in your virtual environment with this command:
    ```
    source env/Scripts/activate
    ```
@@ -40,15 +40,15 @@ pip install -r requirements.txt
    ```
    psql postgres postgres
    ```
-5. The command for creating a database is already defined in the setup.sql file, so we just need to type this command to create the needed database:
+4. The command for creating a database is already defined in the setup.sql file, so we just need to type this command to create the needed database:
    ```
    \i setup.sql
    ```
-7. To make sure that the database is already created. Let's switch to the microservice database by this command:
+5. To make sure that the database is already created. Let's switch to the microservice database by this command:
    ```
    \c microservice
    ```
-9. It's time to run our rest api. On the previous git bash terminal we opened, type this command one by one:
+6. It's time to run our rest api. On the previous git bash terminal we opened, type this command one by one:
    ```
    export FLASK_APP=flaskr
    ```
@@ -58,4 +58,4 @@ pip install -r requirements.txt
    ```
    flask run
    ```
-11. You can test our REST API with [Postman](https://www.postman.com/). You can download Postman and install it on your local computer before test the REST API
+7. You can test our REST API with [Postman](https://www.postman.com/). You can download Postman and install it on your local computer before test the REST API
