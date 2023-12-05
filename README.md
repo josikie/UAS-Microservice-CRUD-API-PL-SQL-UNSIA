@@ -56,4 +56,4 @@ To install all the dependencies type this command:
    ```
    flask run
    ```
-11. You can test our REST API with Postman.
+11. You can test our REST API with [Postman](https://www.postman.com/).
