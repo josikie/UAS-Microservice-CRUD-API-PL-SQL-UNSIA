@@ -23,7 +23,9 @@ Midterm exam project for Pemrograman PL SQL. Group 10.
    ```
 ### Install all the requirements dependencies.
 To install all the dependencies type this command:
-`pip install -r requirements.txt`
+```
+pip install -r requirements.txt
+```
 ### Setup Your Database:
 1. Create .env file, and set variables for the database host, your database user, and your database password on .env file.
    For example:
