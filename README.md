@@ -48,7 +48,8 @@ pip install -r requirements.txt
    ```
    \c microservice
    ```
-6. It's time to run our rest api. On the previous git bash terminal we opened, type this command one by one:
+### It's time to run our REST API. 
+On the previous git bash terminal we opened, type this command one by one:
    ```
    export FLASK_APP=flaskr
    ```
@@ -58,4 +59,5 @@ pip install -r requirements.txt
    ```
    flask run
    ```
-7. You can test our REST API with [Postman](https://www.postman.com/). You can download Postman and install it on your local computer before test the REST API
+### Testing
+You can test our REST API with [Postman](https://www.postman.com/). You can download Postman and install it on your local computer before test the REST API
