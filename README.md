@@ -15,7 +15,7 @@ Midterm exam project for Pemrograman PL SQL. Group 10.
 3. Open the terminal on vscode. If you use Windows, download [git bash](https://git-scm.com/downloads). Install it. Then open git bash on vscode. 
 4. Create the virtual environment with this command:
    ```
-   python -m virutalenv env
+   python -m virtualenv env
    ```
 6. Run the project in your virtual environment with this command:
    ```
