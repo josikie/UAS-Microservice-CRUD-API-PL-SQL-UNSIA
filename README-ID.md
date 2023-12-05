@@ -49,7 +49,8 @@ pip install -r requirements.txt
    ```
    \c microservice
    ```
-6. Kembali ke terminal Git Bash yang kita buka lewat vscode tadi, jalankan perintah ini satu satu:
+### Menjalankan Proyek
+Kembali ke terminal Git Bash yang kita buka lewat vscode tadi, jalankan perintah ini satu satu:
    ```
    export FLASK_APP=flaskr
    ```
@@ -59,4 +60,5 @@ pip install -r requirements.txt
    ```
    flask run
    ```
-7. REST API ini bisa kamu test dengan [Postman](https://www.postman.com/). Kamu dapat download Postman terlebih dahulu dan install di komputer/laptopmu sebelum melakukan test
+### Testing
+REST API ini bisa kamu test dengan [Postman](https://www.postman.com/). Kamu dapat download Postman terlebih dahulu dan install di komputer/laptopmu sebelum melakukan test
