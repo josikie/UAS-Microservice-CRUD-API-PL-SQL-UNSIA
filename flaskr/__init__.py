@@ -111,6 +111,37 @@ def create_app(test_config=None):
         except:
             abort(400)
 
+    
+    @app.route('/microservice/login', methods=['POST'])
+    def login():
+        body = request.get_json()
+        email = body.get('email', None)
+        password = body.get('password', None)
+
+        if email == None:
+            return jsonify({
+                'message': 'Please Provide an Email',
+                'status_code': 400,
+                'success': False
+            })
+        
+        if password == None:
+            return jsonify({
+                'message': 'Please Provide a Password',
+                'status_code': 400,
+                'success': False
+            })
+        
+        try:
+            user = User.query.filter_by(email=email, password=password)
+            return jsonify({
+                'message': 'Succesfully Login',
+                'email': user.first().email,
+                'status_code': 200,
+                'success': True
+            })
+        except:
+            abort(400)
 
     # Handle error
     @app.errorhandler(400)
