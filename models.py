@@ -9,12 +9,21 @@ from sqlalchemy import (
     create_engine,
     ForeignKey,
     Boolean,
-    DateTime
+    DateTime,
+    LargeBinary
 )
 
 import json
 
 from dotenv import load_dotenv
+from encryption import (
+    decrypt,
+    encrypt,
+    BLOCK_SIZE,
+    pad,
+    unpad,
+    SALT
+)
 
 DB_USER = os.environ.get("DB_USER")
 DB_PASSWORD = os.environ.get("DB_PASSWORD")
@@ -37,8 +46,8 @@ def setup_db(app, database_path=database_path):
 class User(db.Model):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True, autoincrement=True)
-    email = Column(String(255), nullable=False, unique=True)
-    password = Column(String(255), nullable=False, server_default='')
+    email = Column(LargeBinary, nullable=False, unique=True)
+    password = Column(LargeBinary, nullable=False, server_default='')
     #roles = db.relationship('Role', secondary='user_roles')
 
     def __init__(self, email, password):
@@ -55,7 +64,7 @@ class User(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
-    
+
     def format(self):
         return {
             'id': self.id,

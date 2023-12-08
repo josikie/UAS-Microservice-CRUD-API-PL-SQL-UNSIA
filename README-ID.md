@@ -62,3 +62,6 @@ Kembali ke terminal Git Bash yang kita buka lewat vscode tadi, jalankan perintah
    ```
 ### Testing
 REST API ini bisa kamu test dengan [Postman](https://www.postman.com/). Kamu dapat download Postman terlebih dahulu dan install di komputer/laptopmu sebelum melakukan test
+
+### Kontributor
+Josi Kie Nababan

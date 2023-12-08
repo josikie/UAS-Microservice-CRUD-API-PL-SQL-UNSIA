@@ -1,9 +1,19 @@
 from flask import Flask, request, abort, jsonify
 from flask_cors import CORS
-
 from models import (
     setup_db,
-    User
+    User,
+    load_dotenv,
+    os
+)
+
+from encryption import(
+    decrypt,
+    encrypt,
+    BLOCK_SIZE,
+    pad,
+    unpad,
+    SALT
 )
 
 def create_app(test_config=None):
@@ -36,14 +46,16 @@ def create_app(test_config=None):
         email = body.get('email', None)
         password = body.get('password', None)
 
-        if email == None and password == None:
+        if email == None or password == None:
             abort(400)
         
+        encryptedEmail = encrypt(email, SALT)
+        encryptedPassword = encrypt(password, SALT)
+
         try:
-            user = User(email, password)
+            user = User(encryptedEmail, encryptedPassword)
             user.insert()
             return jsonify({
-                'email': email,
                 'success': True,
                 'status_code': 200
             })
@@ -56,30 +68,31 @@ def create_app(test_config=None):
         body = request.get_json()
         email = body.get('email', None)
         password = body.get('password', None)
-
-        if request.method == 'PATCH':
-            if email != None:
-                user.email = email
-            if password != None:
-                user.password = password
         
-            try:
-                user.update()
-                return jsonify({
-                    'success': True,
-                    'status_code': 200
-                })
-            except:
-                abort(400)
+        encryptedEmail = encrypt(email, SALT)
+        encryptedPassword = encrypt(password, SALT)
+
+
+        if email != None:
+            user.email = encryptedEmail
+        if password != None:
+            user.password = encryptedPassword
+        
+        try:
+            user.update()
+            return jsonify({
+                'success': True,
+                'status_code': 200
+            })
+        except:
+            abort(400)
         
     
     @app.route('/microservice/user/<int:id>', methods=['DELETE'])
     def delete_user(id):
         user = User.query.get(id)
-        email = user.email
         user.delete()
         return jsonify({
-            'deleted_user': email,
             'success': True,
             'status_code': 200
         })
@@ -91,7 +104,7 @@ def create_app(test_config=None):
         all_users = []
         for user in users:
             all_users.append({
-                "email" : user.email
+                "email" : decrypt(user.email, SALT)
             })
         return jsonify({
             'users': all_users,
@@ -101,47 +114,44 @@ def create_app(test_config=None):
 
     @app.route('/microservice/user/<int:id>', methods=['GET'])
     def get_user(id):
-        try:
-            user = User.query.get(id)
-            return jsonify({
-                'email': user.email,
-                'succes': True,
-                'status_code': 200
-            })
-        except:
-            abort(400)
-
-    
-    @app.route('/microservice/login', methods=['POST'])
-    def login():
-        body = request.get_json()
-        email = body.get('email', None)
-        password = body.get('password', None)
-
-        if email == None:
-            return jsonify({
-                'message': 'Please Provide an Email',
-                'status_code': 400,
-                'success': False
-            })
         
-        if password == None:
-            return jsonify({
-                'message': 'Please Provide a Password',
-                'status_code': 400,
-                'success': False
-            })
+        user = User.query.get(id)
+        email = user.email
+        decryptedEmail = decrypt(email, SALT)
+        return jsonify({
+            'email': decryptedEmail,
+            'succes': True,
+            'status_code': 200
+        })
+       
+
+    # @app.route('/microservice/login', methods=['POST'])
+    # def login():
+    #     body = request.get_json()
+    #     email = body.get('email', None)
+    #     password = body.get('password', None)
+
+    #     if email == None:
+    #         return jsonify({
+    #             'message': 'Please Provide an Email',
+    #             'status_code': 400,
+    #             'success': False
+    #         })
         
-        try:
-            user = User.query.filter_by(email=email, password=password)
-            return jsonify({
-                'message': 'Succesfully Login',
-                'email': user.first().email,
-                'status_code': 200,
-                'success': True
-            })
-        except:
-            abort(400)
+    #     if password == None:
+    #         return jsonify({
+    #             'message': 'Please Provide a Password',
+    #             'status_code': 400,
+    #             'success': False
+    #         })
+        
+
+    #     user = verify_identity(User, email, password)
+    #     return jsonify({
+    #         'message': user.message,
+    #         'status_code': user.status_code,
+    #         'success': user.success
+    #     })
 
     # Handle error
     @app.errorhandler(400)
