@@ -48,7 +48,7 @@ class User(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     email = Column(LargeBinary, nullable=False, unique=True)
     password = Column(LargeBinary, nullable=False, server_default='')
-    #roles = db.relationship('Role', secondary='user_roles')
+    authenticated = Column(Boolean, default=False)
 
     def __init__(self, email, password):
         self.email =  email
@@ -70,7 +70,22 @@ class User(db.Model):
             'id': self.id,
             'email': self.email
         }
+    
+    def is_active(self):
+        """True, as all users are active."""
+        return True
 
+    def get_id(self):
+        """Return the email address to satisfy Flask-Login's requirements."""
+        return str(self.id)
+
+    def is_authenticated(self):
+        """Return True if the user is authenticated."""
+        return self.authenticated
+
+    def is_anonymous(self):
+        """False, as anonymous users aren't supported."""
+        return False
 
 # class Role(db.Model):
 #     __tablename__ = 'roles'

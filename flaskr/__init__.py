@@ -7,6 +7,8 @@ from models import (
     os
 )
 
+from flask_login import login_manager, login_required, login_user, logout_user, current_user, LoginManager
+
 from encryption import(
     decrypt,
     encrypt,
@@ -18,9 +20,12 @@ from encryption import(
 
 def create_app(test_config=None):
     # create and configure app
+    login_manager = LoginManager()
     app = Flask(__name__)
+    app.secret_key = SALT
     with app.app_context():
         setup_db(app)
+        login_manager.init_app(app)
     
     # set up cors
     cors = CORS(app, resources={f"/microservice/*": {'origins': '*'}})
@@ -32,6 +37,15 @@ def create_app(test_config=None):
         response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,PATCH,DELETE,OPTIONS')
         return response
     
+    @app.login_manager.user_loader
+    def user_loader(user_id):
+        """Given *user_id*, return the associated User object.
+
+        :param unicode user_id: user_id (email) user to retrieve
+
+        """
+        return User.query.get(user_id)
+
     # endpoint for base url
     @app.route('/microservice', methods=['GET'])
     def api_endpoint():
@@ -41,6 +55,7 @@ def create_app(test_config=None):
         })
     
     @app.route('/microservice/user/create_user', methods=['POST'])
+    @login_required
     def create_user():
         body = request.get_json()
         email = body.get('email', None)
@@ -63,6 +78,7 @@ def create_app(test_config=None):
             abort(400)
 
     @app.route('/microservice/user/<int:id>', methods=['PATCH'])
+    @login_required
     def patch_user(id):
         user = User.query.get(id)
         body = request.get_json()
@@ -89,6 +105,7 @@ def create_app(test_config=None):
         
     
     @app.route('/microservice/user/<int:id>', methods=['DELETE'])
+    @login_required
     def delete_user(id):
         user = User.query.get(id)
         user.delete()
@@ -98,6 +115,7 @@ def create_app(test_config=None):
         })
 
     @app.route('/microservice/user', methods=['GET'])
+    @login_required
     def get_all_user():
         
         users = User.query.all()
@@ -113,6 +131,7 @@ def create_app(test_config=None):
         })
 
     @app.route('/microservice/user/<int:id>', methods=['GET'])
+    @login_required
     def get_user(id):
         
         user = User.query.get(id)
@@ -120,38 +139,82 @@ def create_app(test_config=None):
         decryptedEmail = decrypt(email, SALT)
         return jsonify({
             'email': decryptedEmail,
+            "authenticated": user.authenticated,
             'succes': True,
             'status_code': 200
         })
        
 
-    # @app.route('/microservice/login', methods=['POST'])
-    # def login():
-    #     body = request.get_json()
-    #     email = body.get('email', None)
-    #     password = body.get('password', None)
+    @app.route('/microservice/login', methods=['POST'])
+    def login():
+        body = request.get_json()
+        email = body.get('email', None)
+        password = body.get('password', None)
 
-    #     if email == None:
-    #         return jsonify({
-    #             'message': 'Please Provide an Email',
-    #             'status_code': 400,
-    #             'success': False
-    #         })
+        if email == None:
+            return jsonify({
+                'message': 'Please Provide an Email',
+                'status_code': 400,
+                'success': False
+            })
         
-    #     if password == None:
-    #         return jsonify({
-    #             'message': 'Please Provide a Password',
-    #             'status_code': 400,
-    #             'success': False
-    #         })
+        if password == None:
+            return jsonify({
+                'message': 'Please Provide a Password',
+                'status_code': 400,
+                'success': False
+            })
         
+        checkedEmail = False
+        checkedPassword = False
 
-    #     user = verify_identity(User, email, password)
-    #     return jsonify({
-    #         'message': user.message,
-    #         'status_code': user.status_code,
-    #         'success': user.success
-    #     })
+        users = User.query.all()
+        demail = None
+        eemail = None
+        dpass = None
+        for i in range(len(users)):
+            if decrypt(users[i].email, SALT) == email:
+                demail = decrypt(users[i].email, SALT)
+                eemail = users[i].email
+                dpass = decrypt(users[i].password, SALT)
+
+        if email == demail:
+            checkedEmail = True
+                
+        if password == dpass:
+            checkedPassword = True
+
+        if checkedEmail and checkedPassword:
+            isLogin = True
+            logedUser = User.query.filter_by(email=eemail).all()
+            logedUser[0].authenticated = True
+            logedUser[0].update()
+            login_user(logedUser[0], remember=True)
+
+        if isLogin:
+            return jsonify({
+                'message': "Password and email correct. Succesfully Log in.",
+                'status_code': 200,
+                'success': True
+            })
+        else:
+            return jsonify({
+                'message': "Wrong Credentials, can't log in.",
+                'status': 400,
+                'success': False 
+            })
+    
+    @app.route('/microservice/logout', methods=['GET'])
+    @login_required
+    def logout():
+        user = current_user
+        user.authenticated = False
+        user.update()
+        logout_user()
+        
+        return jsonify({
+            "success": True
+        })
 
     # Handle error
     @app.errorhandler(400)
@@ -162,4 +225,11 @@ def create_app(test_config=None):
             'message': 'bad request'
         })
     
+    @app.errorhandler(401)
+    def bad_request(error):
+        return jsonify({
+            'success': False,
+            'status_code': 401,
+            'message': 'unauthorized access'
+        })
     return app
