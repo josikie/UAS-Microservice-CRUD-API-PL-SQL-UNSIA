@@ -48,7 +48,7 @@ class User(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     email = Column(LargeBinary, nullable=False, unique=True)
     password = Column(LargeBinary, nullable=False, server_default='')
-    authenticated = Column(Boolean, default=False)
+    active = Column(Boolean, default=False)
 
     def __init__(self, email, password):
         self.email =  email

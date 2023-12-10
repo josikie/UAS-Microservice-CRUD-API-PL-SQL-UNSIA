@@ -139,7 +139,7 @@ def create_app(test_config=None):
         decryptedEmail = decrypt(email, SALT)
         return jsonify({
             'email': decryptedEmail,
-            "authenticated": user.authenticated,
+            "isActive": user.active,
             'succes': True,
             'status_code': 200
         })
@@ -167,6 +167,7 @@ def create_app(test_config=None):
         
         checkedEmail = False
         checkedPassword = False
+        isLogin = False
 
         users = User.query.all()
         demail = None
@@ -187,7 +188,7 @@ def create_app(test_config=None):
         if checkedEmail and checkedPassword:
             isLogin = True
             logedUser = User.query.filter_by(email=eemail).all()
-            logedUser[0].authenticated = True
+            logedUser[0].active = True
             logedUser[0].update()
             login_user(logedUser[0], remember=True)
 
@@ -208,12 +209,14 @@ def create_app(test_config=None):
     @login_required
     def logout():
         user = current_user
-        user.authenticated = False
+        user.active = False
         user.update()
         logout_user()
         
         return jsonify({
-            "success": True
+            "success": True,
+            "message": "Succesfully Log out",
+            "status_code": 200
         })
 
     # Handle error
