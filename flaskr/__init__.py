@@ -4,7 +4,8 @@ from models import (
     setup_db,
     User,
     load_dotenv,
-    os
+    os,
+    Role
 )
 
 from flask_login import login_manager, login_required, login_user, logout_user, current_user, LoginManager
@@ -55,53 +56,61 @@ def create_app(test_config=None):
         })
     
     @app.route('/microservice/user/create_user', methods=['POST'])
-    @login_required
+    #@login_required
     def create_user():
         body = request.get_json()
         email = body.get('email', None)
         password = body.get('password', None)
+        role = body.get('role', None)
 
-        if email == None or password == None:
+        if email == None or password == None or role == None:
             abort(400)
         
         encryptedEmail = encrypt(email, SALT)
         encryptedPassword = encrypt(password, SALT)
-
-        try:
-            user = User(encryptedEmail, encryptedPassword)
-            user.insert()
-            return jsonify({
-                'success': True,
-                'status_code': 200
-            })
-        except:
-            abort(400)
+        user = User(encryptedEmail, encryptedPassword, role)
+        user.insert()
+        return jsonify({
+            'success': True,
+            'status_code': 200
+        })
 
     @app.route('/microservice/user/<int:id>', methods=['PATCH'])
     @login_required
     def patch_user(id):
+        userLoginRoles = current_user.roles
         user = User.query.get(id)
         body = request.get_json()
         email = body.get('email', None)
         password = body.get('password', None)
+        role = body.get('role', None)
         
-        encryptedEmail = encrypt(email, SALT)
-        encryptedPassword = encrypt(password, SALT)
+        for userLoginRole in userLoginRoles:
+            if userLoginRole.id == 1:
+                if email != None: 
+                    encryptedEmail = encrypt(email, SALT)
+                    user.email = encryptedEmail
+                
+                if password != None:
+                    user.password = encryptedPassword
+                    encryptedPassword = encrypt(password, SALT)
 
-
-        if email != None:
-            user.email = encryptedEmail
-        if password != None:
-            user.password = encryptedPassword
-        
-        try:
-            user.update()
-            return jsonify({
-                'success': True,
-                'status_code': 200
-            })
-        except:
-            abort(400)
+                if role != None:
+                    roles = Role.query.get(role)
+                    user.roles.remove(user.roles[0])
+                    user.roles.append(roles)
+                
+                try:
+                    user.update()
+                    return jsonify({
+                        'success': True,
+                        'new_role': user.roles[0].name,
+                        'status_code': 200
+                    })
+                except:
+                    abort(400)
+            else:
+                abort(401)
         
     
     @app.route('/microservice/user/<int:id>', methods=['DELETE'])
@@ -136,10 +145,13 @@ def create_app(test_config=None):
         
         user = User.query.get(id)
         email = user.email
+        print(user.roles)
         decryptedEmail = decrypt(email, SALT)
         return jsonify({
             'email': decryptedEmail,
             "isActive": user.active,
+            'role_id': user.roles[0].id,
+            'role_name': user.roles[0].name,
             'succes': True,
             'status_code': 200
         })

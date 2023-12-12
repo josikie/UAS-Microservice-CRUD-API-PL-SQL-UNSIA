@@ -1,6 +1,8 @@
 import os
 from flask import Flask, render_template_string
 from flask_sqlalchemy import SQLAlchemy
+from flask_authorize import RestrictionsMixin, AllowancesMixin
+from flask_authorize import PermissionsMixin
 
 from sqlalchemy import (
     Column,
@@ -42,6 +44,11 @@ def setup_db(app, database_path=database_path):
         db.init_app(app)
         db.create_all()
 
+UserRole = db.Table(
+    'user_role', db.Model.metadata,
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id')),
+    db.Column('role_id', db.Integer, db.ForeignKey('roles.id'))
+)
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -49,10 +56,12 @@ class User(db.Model):
     email = Column(LargeBinary, nullable=False, unique=True)
     password = Column(LargeBinary, nullable=False, server_default='')
     active = Column(Boolean, default=False)
+    roles = db.relationship('Role', secondary=UserRole)
 
-    def __init__(self, email, password):
+    def __init__(self, email, password, role):
         self.email =  email
         self.password = password
+        self.roles.append(Role.query.get(role))
 
     def insert(self):
         db.session.add(self)
@@ -68,7 +77,8 @@ class User(db.Model):
     def format(self):
         return {
             'id': self.id,
-            'email': self.email
+            'email': self.email,
+            'role': self.roles
         }
     
     def is_active(self):
@@ -86,6 +96,11 @@ class User(db.Model):
     def is_anonymous(self):
         """False, as anonymous users aren't supported."""
         return False
+
+class Role(db.Model):
+    __tablename__ = 'roles'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False, unique=True)
 
 # class Role(db.Model):
 #     __tablename__ = 'roles'

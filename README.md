@@ -30,9 +30,10 @@ pip install -r requirements.txt
 1. Create .env file, and set variables for the database host, your database user, and your database password on .env file.
    For example:
    ```
-    DB_HOST="localhost:5432"
-    DB_USER="yourdb"
-    DB_PASSWORD="yourpassword"
+   DB_HOST="localhost:5432"
+   DB_USER="yourdb"
+   DB_PASSWORD="yourpassword"
+   KEY="secretkey"
    ```
 2. Create a new terminal on vscode.
 3. Run Postgres with the default database in Postgres. It would ask for your user password for user Postgres.
