@@ -15,7 +15,7 @@ Postman Export (documentation): [Microservice.postman_collection.json](https://g
 ### Clone The Project
 1. Clone the project with this command:
    ```
-   git clone https://github.com/josikie/microservice-login.git
+   git clone https://github.com/josikie/UTS-Microservice-CRUD-API-PL-SQL-UNSIA.git
    ```
 2. Open project on vscode. 
 ### Create environment variable:
