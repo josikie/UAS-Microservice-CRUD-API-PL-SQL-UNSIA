@@ -60,7 +60,7 @@ On the previous git bash terminal we opened, type this command one by one:
    ```
    flask run
    ```
-### REST API Endpoints
+## REST API Endpoints
 Endpoints users can access without login:
 ```
 1. GET /microservices
