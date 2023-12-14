@@ -4,7 +4,6 @@ from Crypto.Cipher import AES
 from Crypto import Random
 import os
 
-# using AES 256 to encrypt and decrypt data
 BLOCK_SIZE = 16
 pad = lambda s: s + (BLOCK_SIZE - len(s) % BLOCK_SIZE) * chr(BLOCK_SIZE - len(s) % BLOCK_SIZE)
 unpad = lambda s: s[:-ord(s[len(s) - 1:])]
@@ -12,6 +11,7 @@ unpad = lambda s: s[:-ord(s[len(s) - 1:])]
 SALT = os.environ.get("KEY")
 
 def encrypt(raw, key):
+    # private key stores byte string with 32 bytes (256 bits) 
     private_key = hashlib.sha256(key.encode("utf-8")).digest()
     raw = pad(raw)
     iv = Random.new().read(AES.block_size)
@@ -20,6 +20,7 @@ def encrypt(raw, key):
  
  
 def decrypt(enc, key):
+    # private key stores byte string with 32 bytes (256 bits) 
     private_key = hashlib.sha256(key.encode("utf-8")).digest()
     enc = base64.b64decode(enc)
     iv = enc[:16]
