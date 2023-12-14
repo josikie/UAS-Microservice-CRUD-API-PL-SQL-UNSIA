@@ -30,9 +30,10 @@ pip install -r requirements.txt
 1. Buat .env file, dan isi variabel database host, database user, and database password di .env file.
    Contohnya:
    ```
-    DB_HOST="localhost:5432"
-    DB_USER="yourdb"
-    DB_PASSWORD="yourpassword"
+   DB_HOST="localhost:5432"
+   DB_USER="yourdb"
+   DB_PASSWORD="yourpassword"
+   KEY="secretkey"
    ```
 2. Buat terminal baru di vscode.
 3. Jalankan Postgres dengan default database. Setelah perintah di bawah dijalankan, Postgres akan menanyakan password yang kamu atur untuk user Postgres.
@@ -62,6 +63,3 @@ Kembali ke terminal Git Bash yang kita buka lewat vscode tadi, jalankan perintah
    ```
 ### Testing
 REST API ini bisa kamu test dengan [Postman](https://www.postman.com/). Kamu dapat download Postman terlebih dahulu dan install di komputer/laptopmu sebelum melakukan test
-
-### Kontributor
-Josi Kie Nababan

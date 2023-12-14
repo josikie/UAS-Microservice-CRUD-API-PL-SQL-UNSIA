@@ -62,6 +62,3 @@ On the previous git bash terminal we opened, type this command one by one:
    ```
 ### Testing
 You can test our REST API with [Postman](https://www.postman.com/). You can download Postman and install it on your local computer before test the REST API
-
-### Contributors
-Josi Kie Nababan

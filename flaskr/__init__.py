@@ -56,38 +56,44 @@ def create_app(test_config=None):
         })
     
     @app.route('/microservice/user/create_user', methods=['POST'])
-    #@login_required
+    @login_required
     def create_user():
-        body = request.get_json()
-        email = body.get('email', None)
-        password = body.get('password', None)
-        role = body.get('role', None)
+        userLoginRoles = current_user.roles
+        for userLoginRole in userLoginRoles:
+            if userLoginRole.id == 1:
+                body = request.get_json()
+                email = body.get('email', None)
+                password = body.get('password', None)
+                role = body.get('role', None)
 
-        if email == None or password == None or role == None:
-            abort(400)
-        
-        encryptedEmail = encrypt(email, SALT)
-        encryptedPassword = encrypt(password, SALT)
-        user = User(encryptedEmail, encryptedPassword, role)
-        user.insert()
-        return jsonify({
-            'success': True,
-            'status_code': 200
-        })
+                if email == None or password == None or role == None:
+                    abort(400)
+                
+                encryptedEmail = encrypt(email, SALT)
+                encryptedPassword = encrypt(password, SALT)
+                user = User(encryptedEmail, encryptedPassword, role)
+                user.insert()
+                return jsonify({
+                    'success': True,
+                    'status_code': 200
+                })
+            else:
+                abort(401)
 
     @app.route('/microservice/user/<int:id>', methods=['PATCH'])
     @login_required
     def patch_user(id):
-        userLoginRoles = current_user.roles
         user = User.query.get(id)
         body = request.get_json()
+        userLoginRoles = current_user.roles
+        
         email = body.get('email', None)
         password = body.get('password', None)
         role = body.get('role', None)
         
         for userLoginRole in userLoginRoles:
             if userLoginRole.id == 1:
-                if email != None: 
+                if email != None:
                     encryptedEmail = encrypt(email, SALT)
                     user.email = encryptedEmail
                 
@@ -116,46 +122,56 @@ def create_app(test_config=None):
     @app.route('/microservice/user/<int:id>', methods=['DELETE'])
     @login_required
     def delete_user(id):
-        user = User.query.get(id)
-        user.delete()
-        return jsonify({
-            'success': True,
-            'status_code': 200
-        })
+        userLoginRoles = current_user.roles
+        for userLoginRole in userLoginRoles:
+            if userLoginRole.id == 1:
+                try:
+                    user = User.query.get(id)
+                    user.delete()
+                    return jsonify({
+                        'success': True,
+                        'status_code': 200
+                    })
+                except:
+                    abort(400)
+            else:
+                abort(401)
 
     @app.route('/microservice/user', methods=['GET'])
     @login_required
     def get_all_user():
-        
-        users = User.query.all()
-        all_users = []
-        for user in users:
-            all_users.append({
-                "email" : decrypt(user.email, SALT)
+        try:
+            users = User.query.all()
+            all_users = []
+            for user in users:
+                all_users.append({
+                    "email" : decrypt(user.email, SALT)
+                })
+            return jsonify({
+                'users': all_users,
+                'success': True,
+                'status_code': 200
             })
-        return jsonify({
-            'users': all_users,
-            'success': True,
-            'status_code': 200
-        })
+        except:
+            abort(400)
 
     @app.route('/microservice/user/<int:id>', methods=['GET'])
     @login_required
     def get_user(id):
-        
-        user = User.query.get(id)
-        email = user.email
-        print(user.roles)
-        decryptedEmail = decrypt(email, SALT)
-        return jsonify({
-            'email': decryptedEmail,
-            "isActive": user.active,
-            'role_id': user.roles[0].id,
-            'role_name': user.roles[0].name,
-            'succes': True,
-            'status_code': 200
-        })
-       
+        try:
+            user = User.query.get(id)
+            email = user.email
+            decryptedEmail = decrypt(email, SALT)
+            return jsonify({
+                'email': decryptedEmail,
+                "isActive": user.active,
+                'role_id': user.roles[0].id,
+                'role_name': user.roles[0].name,
+                'succes': True,
+                'status_code': 200
+            })
+        except:
+            abort(400)
 
     @app.route('/microservice/login', methods=['POST'])
     def login():
@@ -214,7 +230,7 @@ def create_app(test_config=None):
             return jsonify({
                 'message': "Wrong Credentials, can't log in.",
                 'status': 400,
-                'success': False 
+                'success': False
             })
     
     @app.route('/microservice/logout', methods=['GET'])
