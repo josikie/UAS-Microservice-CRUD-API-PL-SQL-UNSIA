@@ -85,7 +85,135 @@ Endpoints users with Admin role can access (with login):
 7. PATCH /microservices/user/<int:id>
 8. DELETE /microservices/user/<int:id>
 ```
+## REST API Resources
+GET `http://127.0.0.1:5000/microservice`
+- used to get the welcome message.
+- return a JSON object containing a welcome message and success.
+return example:
+```
+{
+  "message": "Hello! Welcome to Microservice. To access another features, please log in.",
+  "success": true
+}
+```
 
-### Testing
+POST `http://127.0.0.1:5000/microservice/login`
+- used for user login.
+- return JSON object containing message, success, and status code.
+- need email and password provided.
+return example:
+```
+{
+    "message": "Password and email correct. Succesfully Log in.",
+    "status_code": 200,
+    "success": true
+}
+```
+
+GET `http://127.0.0.1:5000/microservice/user`
+- used to fetch all user emails.
+- return JSON object containing status code, success, and all user emails.
+- need authorization to access (Admin or Member role).
+return example:
+```
+{
+    "status_code": 200,
+    "success": true,
+    "users": [
+        {
+            "email": "admin@gmail.com"
+        },
+        {
+            "email": "member@gmail.com"
+        },
+        {
+            "email": "admin5@gmail.com"
+        }
+    ]
+}
+```
+
+GET `http://127.0.0.1:5000/microservice/user/<int:id>`
+- used to fetch a specific user's email.
+- return JSON object containing status code, success, and email from a specific user.
+- need authorization to access (Admin or Member role)
+- need to define the user id.
+return example:
+```
+{
+    "email": "admin@gmail.com",
+    "isActive": false,
+    "role_id": 1,
+    "role_name": "Admin",
+    "status_code": 200,
+    "success": true
+}
+```
+
+GET `http://127.0.0.1:5000/microservice/logout`
+- used for user logout
+- return JSON object containing message, status code, and success.
+- need authorization (Admin or role member)
+return example:
+```
+{
+    "message": "Successfully Log out",
+    "status_code": 200,
+    "success": true
+}
+```
+
+POST `http://127.0.0.1:5000/microservice/user/create_user`
+- used to create new user.
+- return JSON object containing status code and success.
+- need authorization (Admin role).
+- need JSON object on the body to send user's data that wants to be created: email, password, and role.
+return example:
+```
+{
+    "status_code": 200,
+    "success": true
+}
+```
+
+PATCH `http://127.0.0.1:5000/microservice/user/7`
+- used to update user's data.
+- return JSON object containing status code, success, and the new role.
+- need authorization (Admin role)
+- need a user id on the link.
+- need JSON object on the body to send user's data that wants to be updated.
+return example:
+```
+{
+    "new_role": "Admin",
+    "status_code": 200,
+    "success": true
+}
+```
+DELETE `http://127.0.0.1:5000/microservice/user/7`
+- used to delete a specific user.
+- return JSON object containing status code and success.
+- need authorization (Admin role).
+- need a user id on the link.
+return example:
+```
+{
+    "status_code": 200,
+    "success": true
+}
+```
+
+### Error Handling
+There are two error handlers for four errors. The errors returned JSON objects in the following format:
+```
+'success': False,
+'status_code': 401,
+'message': 'unauthorized access'
+```
+These are three error types when requests fail:
+- 400: Bad Request
+- 401: Unauthorized Access.
+
+## Testing
 You can test our REST API with [Postman](https://www.postman.com/). You can download Postman and install it on your local computer before testing the REST API
 
