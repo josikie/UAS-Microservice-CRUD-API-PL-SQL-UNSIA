@@ -19,7 +19,7 @@ Postman Export (Dokumentasi Postman): [Microservice.postman_collection.json](htt
    ```
 3. Buka proyek di vscode. Jika belum ada vscode, bisa di download terlebih dahulu. 
 ### Buat lingkungan virtual:
-1. Bukan terminal dari vscode. Jika kamu menggunakan Windows, download [GitBash](https://git-scm.com/downloads). Install GitBash. Kemudian buka terminal dari vscode.
+1. Buka terminal dari vscode. Jika kamu menggunakan Windows, download [GitBash](https://git-scm.com/downloads). Install GitBash. Kemudian buka terminal dari vscode.
 2. Install virualenv dengan perintah berikut:
    ```
    pip install virtualenv
