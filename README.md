@@ -1,7 +1,7 @@
 # Documentation
 Microservice login is a microservice project with REST API for login, CRUD on users table, and user access management (Role: Admin, Member) built on Python and Flask. This project was created by Group 10 to complete the Midterm Exam project of Pemrograman PL SQL. 
 
-This project leverages AES 256 to encrypt user data such as email and password. So, email and password will be encrypted first before being saved on the database. About the encryption and decryption function processes, please take a look at the [microservice-login/encryption.py](https://github.com/josikie/microservice-login/blob/main/encryption.py) file.
+This project leverages AES 256 to encrypt user data such as email and password. So, email and password will be encrypted first before being saved on the database. About the encryption and decryption function processes, please take a look at the [microservice-login/encryption.py](https://github.com/josikie/UTS-Microservice-CRUD-API-PL-SQL-UNSIA/blob/main/encryption.py) file.
 
 Group 10:
 - Josi Kie Nababan ( 220401010122 )
@@ -9,7 +9,7 @@ Group 10:
 - Jefrianto (220401010114)
 - Ivonne Caroline (210401010213)
 
-Postman Export (documentation): [Microservice.postman_collection.json](https://github.com/josikie/microservice-login/blob/main/Microservice.postman_collection.json)
+Postman Export: [Microservice.postman_collection.json](https://github.com/josikie/UTS-Microservice-CRUD-API-PL-SQL-UNSIA/blob/main/Microservice.postman_collection.json)
 
 ## Setting Up the Project in local
 ### Clone The Project
