@@ -91,7 +91,9 @@ Endpoints users with Admin role can access (with login):
 GET `http://127.0.0.1:5000/microservice`
 - used to get the welcome message.
 - return a JSON object containing a welcome message and success.
+  
 return example:
+
 ```
 {
   "message": "Hello! Welcome to Microservice. To access another features, please log in.",
@@ -103,7 +105,9 @@ POST `http://127.0.0.1:5000/microservice/login`
 - used for user login.
 - return JSON object containing message, success, and status code.
 - need email and password provided.
+
 return example:
+
 ```
 {
     "message": "Password and email correct. Succesfully Log in.",
@@ -116,7 +120,9 @@ GET `http://127.0.0.1:5000/microservice/user`
 - used to fetch all user emails.
 - return JSON object containing status code, success, and all user emails.
 - need authorization to access (Admin or Member role).
+  
 return example:
+
 ```
 {
     "status_code": 200,
@@ -140,7 +146,9 @@ GET `http://127.0.0.1:5000/microservice/user/<int:id>`
 - return JSON object containing status code, success, and email from a specific user.
 - need authorization to access (Admin or Member role)
 - need to define the user id.
+  
 return example:
+
 ```
 {
     "email": "admin@gmail.com",
@@ -153,10 +161,12 @@ return example:
 ```
 
 GET `http://127.0.0.1:5000/microservice/logout`
-- used for user logout
+- used for user logout.
 - return JSON object containing message, status code, and success.
-- need authorization (Admin or role member)
+- need authorization (Admin or role member).
+  
 return example:
+
 ```
 {
     "message": "Successfully Log out",
@@ -170,7 +180,9 @@ POST `http://127.0.0.1:5000/microservice/user/create_user`
 - return JSON object containing status code and success.
 - need authorization (Admin role).
 - need JSON object on the body to send user's data that wants to be created: email, password, and role.
+  
 return example:
+
 ```
 {
     "status_code": 200,
@@ -184,7 +196,9 @@ PATCH `http://127.0.0.1:5000/microservice/user/7`
 - need authorization (Admin role)
 - need a user id on the link.
 - need JSON object on the body to send user's data that wants to be updated.
+  
 return example:
+
 ```
 {
     "new_role": "Admin",
@@ -197,7 +211,9 @@ DELETE `http://127.0.0.1:5000/microservice/user/7`
 - return JSON object containing status code and success.
 - need authorization (Admin role).
 - need a user id on the link.
+  
 return example:
+
 ```
 {
     "status_code": 200,
