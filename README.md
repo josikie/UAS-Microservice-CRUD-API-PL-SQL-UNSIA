@@ -1,5 +1,5 @@
-# Microservice-login
-Midterm exam project for Pemrograman PL SQL. Group 10. 
+# Documentation
+Microservice login is a microservice project with REST API for login and user access management built on Python and Flask. This project was created by Group 10 to complete the Midterm Exam project of Pemrograman PL SQL.
 ## Setting Up the Project in local
 ### Clone The Project
 1. Clone the project with this command:
@@ -60,5 +60,32 @@ On the previous git bash terminal we opened, type this command one by one:
    ```
    flask run
    ```
+### REST API Endpoints
+Endpoints users can access without login:
+```
+1. GET /microservices
+2. POST /microservices/login
+```
+Endpoints users with Member role can access (with login):
+```
+1. GET /microservices
+2. POST /microservices/login
+3. GET /microservices/user
+4. GET /microservices/user/<int:id>
+5. GET /microservices/logout
+```
+Endpoints users with Admin role can access (with login):
+```
+1. GET /microservices
+2. POST /microservices/login
+3. GET /microservices/user
+4. GET /microservices/user/<int:id>
+5. GET /microservices/logout
+6. POST /microservices/user/create_user
+7. PATCH /microservices/user/<int:id>
+8. DELETE /microservices/user/<int:id>
+```
+
 ### Testing
-You can test our REST API with [Postman](https://www.postman.com/). You can download Postman and install it on your local computer before test the REST API
+You can test our REST API with [Postman](https://www.postman.com/). You can download Postman and install it on your local computer before testing the REST API
+
