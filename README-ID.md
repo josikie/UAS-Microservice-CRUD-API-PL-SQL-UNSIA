@@ -1,7 +1,7 @@
 # Microservice-login
 Microservice login adalah sebuah proyek microservice dengan REST API untuk login, CRUD tabel users, dan manajemen akses pengguna (role: admin, member) yang dibangun di atas Python dan Flask. Proyek ini dibuat oleh kelompok 10 untuk menyelesaikan proyek Ujian Tengah Semester Pemrograman PL SQL.
 
-Proyek ini memanfaatkan AES 256 untuk mengenkripsi data pengguna seperti email dan password. Jadi, email dan password akan dienkripsi terlebih dahulu sebelum disimpan pada database. Mengenai proses fungsi enkripsi dan dekripsi dapat dilihat pada file [microservice-login/encryption.py](https://github.com/josikie/microservice-login/blob/main/encryption.py).
+Proyek ini memanfaatkan AES 256 untuk mengenkripsi data pengguna seperti email dan password. Jadi, email dan password akan dienkripsi terlebih dahulu sebelum disimpan pada database. Mengenai proses fungsi enkripsi dan dekripsi dapat dilihat pada file [microservice-login/encryption.py](https://github.com/josikie/UTS-Microservice-CRUD-API-PL-SQL-UNSIA/blob/main/encryption.py).
 
 Group 10:
 - Josi Kie Nababan ( 220401010122 )
@@ -9,13 +9,13 @@ Group 10:
 - Jefrianto (220401010114)
 - Ivonne Caroline (210401010213)
 
-Postman Export (Dokumentasi Postman): [Microservice.postman_collection.json](https://github.com/josikie/microservice-login/blob/main/Microservice.postman_collection.json)
+Postman Export (Dokumentasi Postman): [Microservice.postman_collection.json](https://github.com/josikie/UTS-Microservice-CRUD-API-PL-SQL-UNSIA/blob/main/Microservice.postman_collection.json)
 
 ## Menyiapkan Proyek di Komputer/Laptop
 ### Clone Proyek
 1. Clone proyek dengan perintah berikut:
    ```
-   git clone https://github.com/josikie/microservice-login.git
+   git clone https://github.com/josikie/UTS-Microservice-CRUD-API-PL-SQL-UNSIA.git
    ```
 3. Buka proyek di vscode. Jika belum ada vscode, bisa di download terlebih dahulu. 
 ### Buat lingkungan virtual:
