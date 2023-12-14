@@ -55,6 +55,7 @@ def create_app(test_config=None):
             'message': 'Hello! Welcome to Microservice. To access another features, please log in.'
         })
     
+    
     @app.route('/microservice/user/create_user', methods=['POST'])
     @login_required
     def create_user():
