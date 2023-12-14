@@ -234,13 +234,13 @@ contoh return:
 ```
 
 ### Error Handling
-Ada dua penangan kesalahan untuk empat kesalahan. Kesalahan mengembalikan objek JSON dalam format berikut:
+Ada dua penangan untuk error/kesalahan. Kesalahan mengembalikan objek JSON dalam format berikut:
 ```
 'success': False,
 'status_code': 401,
 'message': 'unauthorized access'
 ```
-Berikut adalah tiga jenis kesalahan ketika permintaan gagal:
+Berikut adalah dua jenis kesalahan ketika permintaan gagal:
 - 400: Bad Request
 - 401: Unauthorized Access.
 
