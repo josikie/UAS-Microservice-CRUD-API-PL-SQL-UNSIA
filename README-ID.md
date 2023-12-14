@@ -1,5 +1,5 @@
 # Microservice-login
-Microservice login adalah sebuah proyek microservice dengan REST API untuk login dan manajemen akses pengguna yang dibangun di atas Python dan Flask. Proyek ini dibuat oleh kelompok 10 untuk menyelesaikan proyek Ujian Tengah Semester Pemrograman PL SQL.
+Microservice login adalah sebuah proyek microservice dengan REST API untuk login, CRUD tabel users, dan manajemen akses pengguna (admin, member) yang dibangun di atas Python dan Flask. Proyek ini dibuat oleh kelompok 10 untuk menyelesaikan proyek Ujian Tengah Semester Pemrograman PL SQL.
 
 Proyek ini memanfaatkan AES 256 untuk mengenkripsi data pengguna seperti email dan password. Jadi, email dan password akan dienkripsi terlebih dahulu sebelum disimpan pada database. Mengenai proses fungsi enkripsi dan dekripsi dapat dilihat pada file [microservice-login/encryption.py](https://github.com/josikie/microservice-login/blob/main/encryption.py).
 
