@@ -104,7 +104,7 @@ return example:
 POST `http://127.0.0.1:5000/microservice/login`
 - used for user login.
 - return JSON object containing message, success, and status code.
-- need email and password provided.
+- need JSON object on the body containing the user's email and password.
 
 return example:
 
@@ -145,7 +145,7 @@ GET `http://127.0.0.1:5000/microservice/user/<int:id>`
 - used to fetch a specific user's email.
 - return JSON object containing status code, success, and email from a specific user.
 - need authorization to access (Admin or Member role)
-- need to define the user id.
+- need to define the user id on the link.
   
 return example:
 
@@ -176,7 +176,7 @@ return example:
 ```
 
 POST `http://127.0.0.1:5000/microservice/user/create_user`
-- used to create new user.
+- used to create a new user.
 - return JSON object containing status code and success.
 - need authorization (Admin role).
 - need JSON object on the body to send user's data that wants to be created: email, password, and role.
