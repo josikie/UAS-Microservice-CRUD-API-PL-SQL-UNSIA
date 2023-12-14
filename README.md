@@ -231,13 +231,13 @@ return example:
 ```
 
 ### Error Handling
-There are two error handlers for four errors. The errors returned JSON objects in the following format:
+There are two error handlers for errors. The errors returned JSON objects in the following format:
 ```
 'success': False,
 'status_code': 401,
 'message': 'unauthorized access'
 ```
-These are three error types when requests fail:
+These are two error types when requests fail:
 - 400: Bad Request
 - 401: Unauthorized Access.
 
