@@ -7,7 +7,6 @@ Group 10:
 - Josi Kie Nababan ( 220401010122 )
 - Ismal Zikri ( 220401010009 )
 - Jefrianto (220401010114)
-- Ivonne Caroline (210401010213)
 
 Postman Export: [Microservice.postman_collection.json](https://github.com/josikie/UTS-Microservice-CRUD-API-PL-SQL-UNSIA/blob/main/Microservice.postman_collection.json)
 
