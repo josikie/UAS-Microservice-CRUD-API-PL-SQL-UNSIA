@@ -243,5 +243,53 @@ Berikut adalah dua jenis kesalahan ketika permintaan gagal:
 - 400: Bad Request
 - 401: Unauthorized Access.
 
+### Trigger Log
+Trigger Log tidak dikonfigurasi melalui aplikasi, melainkan dari database dengan query berikut
+1. Buat tabel audit_log
+```
+CREATE TABLE audit_log(
+   log_id serial PRIMARY KEY,
+   users_id VARCHAR(255),
+   changed_field VARCHAR(255),
+   old_value VARCHAR(255),
+   new_value VARCHAR(255),
+   log_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
+```
+2. Buat fungsi log_user_changes
+```
+CREATE OR REPLACE FUNCTION log_users_changes()
+RETURNS TRIGGER AS $$
+BEGIN
+   IF NEW.email IS DISTINCT FROM OLD.email THEN
+   INSERT INTO audit_log(users_id, changed_field, old_value, new_value)
+   VALUES (current_user::text, 'email', OLD.email, NEW.email);
+END IF;
+
+   IF NEW.password IS DISTINCT FROM OLD.password THEN
+   INSERT INTO audit_log(users_id, changed_field, old_value, new_value)
+   VALUES(current_user::text, 'password', OLD.password, NEW.password);
+END IF;
+
+RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+```
+3. Buat trigger users_changes_trigger dan eksekusi fungsi log_users_changes
+```
+CREATE TRIGGER users_changes_trigger
+AFTER UPDATE ON users
+FOR EACH ROW
+EXECUTE FUNCTION log_users_changes();
+```
+
 ## Testing
+1. REST API
 REST API ini bisa kamu test dengan [Postman](https://www.postman.com/). Kamu dapat download Postman terlebih dahulu dan install di komputer/laptopmu sebelum melakukan test
+
+2. Trigger Log
+Berikut adalah email dan password yang tersimpan di database
+![image](https://github.com/josikie/UAS-Microservice-CRUD-API-PL-SQL-UNSIA/assets/63739078/565b4c31-8ab8-4009-b91d-8cc8cbf4e5fc)
+
+Ketika user mengubah data, perubahan tersimpan pada tabel audit_log table dengan format aes256 yang terenkripsi
+![image](https://github.com/josikie/UAS-Microservice-CRUD-API-PL-SQL-UNSIA/assets/63739078/2912bc33-57bc-4f21-9623-e56ccdd0f432)
