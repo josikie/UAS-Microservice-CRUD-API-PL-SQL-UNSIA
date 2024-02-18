@@ -14,7 +14,7 @@ Kami melakukan Pendekatan Agile karena menurut kami itulah yang terbaik bagi kam
 
 kami mencoba memisahkan dan menerapkan praktik menggunakan SCRUM, mari kami jelaskan hal ini:
 
-Prinsip Agile
+###Prinsip Agile
 Diskusikan prinsip-prinsip utama Agile sebagaimana diuraikan dalam Agile Manifesto. Prinsip-prinsip ini meliputi:
 
 - Individu dan interaksi atas proses dan alat.
@@ -22,7 +22,7 @@ Diskusikan prinsip-prinsip utama Agile sebagaimana diuraikan dalam Agile Manifes
 - Kolaborasi pelanggan melalui negosiasi kontrak.
 - Menanggapi perubahan dengan mengikuti rencana.
 
-Praktek Tangkas
+###Praktek Tangkas
 Jelaskan praktik Agile yang diikuti tim Anda. Praktik Agile yang umum meliputi:
 
 - Scrum: Kerangka kerja berulang dan bertahap untuk mengelola pekerjaan pengetahuan yang kompleks.
