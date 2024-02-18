@@ -17,17 +17,18 @@ we try to separate and implement practices using SCRUM, let us explain this stuf
 Agile Principles
 Discuss the key principles of Agile as outlined in the Agile Manifesto. These principles include:
 
-Individuals and interactions over processes and tools
-Working solutions over comprehensive documentation
-Customer collaboration over contract negotiation
-Responding to change by following a plan
+- Individuals and interactions over processes and tools.
+- Working solutions over comprehensive documentation.
+- Customer collaboration over contract negotiation.
+- Responding to change by following a plan.
+
 Agile Practices
 Explain the Agile practices that your team follows. Common Agile practices include:
 
-Scrum: An iterative and incremental framework for managing complex knowledge work.
-Kanban: A visual management method to balance demand with available capacity.
-User Stories: Short, simple descriptions of a feature told from the perspective of the person who desires the new capability.
-Daily Standups: Brief daily meetings to discuss progress, plans, and impediments.
+- Scrum: An iterative and incremental framework for managing complex knowledge work.
+- Kanban: A visual management method to balance demand with available capacity.
+- User Stories: Short, simple descriptions of a feature told from the perspective of the person who desires the new capability.
+- Daily Standups: Brief daily meetings to discuss progress, plans, and impediments.
 
 Postman Export: [Microservice.postman_collection.json](https://github.com/josikie/UTS-Microservice-CRUD-API-PL-SQL-UNSIA/blob/main/Microservice.postman_collection.json)
 
