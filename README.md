@@ -14,7 +14,7 @@ We do the Agile Approach because we thought is the best for us because everyone 
 
 we try to separate and implement practices using SCRUM, let us explain this stuff: 
 
-Agile Principles
+### Agile Principles
 Discuss the key principles of Agile as outlined in the Agile Manifesto. These principles include:
 
 - Individuals and interactions over processes and tools.
@@ -22,7 +22,7 @@ Discuss the key principles of Agile as outlined in the Agile Manifesto. These pr
 - Customer collaboration over contract negotiation.
 - Responding to change by following a plan.
 
-Agile Practices
+### Agile Practices
 Explain the Agile practices that your team follows. Common Agile practices include:
 
 - Scrum: An iterative and incremental framework for managing complex knowledge work.
