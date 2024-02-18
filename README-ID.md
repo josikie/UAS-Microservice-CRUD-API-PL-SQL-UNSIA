@@ -22,7 +22,7 @@ Diskusikan prinsip-prinsip utama Agile sebagaimana diuraikan dalam Agile Manifes
 - Kolaborasi pelanggan melalui negosiasi kontrak.
 - Menanggapi perubahan dengan mengikuti rencana.
 
-### Praktek Tangkas
+### Praktek Agile
 Jelaskan praktik Agile yang diikuti tim Anda. Praktik Agile yang umum meliputi:
 
 - Scrum: Kerangka kerja berulang dan bertahap untuk mengelola pekerjaan pengetahuan yang kompleks.
