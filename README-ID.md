@@ -17,17 +17,18 @@ kami mencoba memisahkan dan menerapkan praktik menggunakan SCRUM, mari kami jela
 Prinsip Agile
 Diskusikan prinsip-prinsip utama Agile sebagaimana diuraikan dalam Agile Manifesto. Prinsip-prinsip ini meliputi:
 
-Individu dan interaksi atas proses dan alat
-Solusi kerja melalui dokumentasi yang komprehensif
-Kolaborasi pelanggan melalui negosiasi kontrak
-Menanggapi perubahan dengan mengikuti rencana
+- Individu dan interaksi atas proses dan alat.
+- Solusi kerja melalui dokumentasi yang komprehensif.
+- Kolaborasi pelanggan melalui negosiasi kontrak.
+- Menanggapi perubahan dengan mengikuti rencana.
+
 Praktek Tangkas
 Jelaskan praktik Agile yang diikuti tim Anda. Praktik Agile yang umum meliputi:
 
-Scrum: Kerangka kerja berulang dan bertahap untuk mengelola pekerjaan pengetahuan yang kompleks.
-Kanban: Metode manajemen visual untuk menyeimbangkan permintaan dengan kapasitas yang tersedia.
-Kisah Pengguna: Deskripsi singkat dan sederhana tentang fitur yang diceritakan dari sudut pandang orang yang menginginkan kemampuan baru.
-Standup Harian: Pertemuan harian singkat untuk membahas kemajuan
+- Scrum: Kerangka kerja berulang dan bertahap untuk mengelola pekerjaan pengetahuan yang kompleks.
+- Kanban: Metode manajemen visual untuk menyeimbangkan permintaan dengan kapasitas yang tersedia.
+- Kisah Pengguna: Deskripsi singkat dan sederhana tentang fitur yang diceritakan dari sudut pandang orang yang menginginkan kemampuan baru.
+- Standup Harian: Pertemuan harian singkat untuk membahas kemajuan.
 
 Postman Export: [Microservice.postman_collection.json](https://github.com/josikie/UTS-Microservice-CRUD-API-PL-SQL-UNSIA/blob/main/Microservice.postman_collection.json)
 
