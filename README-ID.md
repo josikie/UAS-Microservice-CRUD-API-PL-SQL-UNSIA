@@ -8,6 +8,27 @@ Kelompok 10:
 - Ismal Zikri ( 220401010009 )
 - Jefrianto (220401010114)
 
+# Methodology Software Development Life Cycle (SDLC): Pendekatan Agile  
+
+Kami melakukan Pendekatan Agile karena menurut kami itulah yang terbaik bagi kami karena setiap orang dapat melakukan beberapa hal yang fleksibel, dan melakukan berbagai hal, seperti siapa yang pertama kali inisiasi, fitur yang terakhir diperbarui, dan seterusnya.
+
+kami mencoba memisahkan dan menerapkan praktik menggunakan SCRUM, mari kami jelaskan hal ini:
+
+Prinsip Agile
+Diskusikan prinsip-prinsip utama Agile sebagaimana diuraikan dalam Agile Manifesto. Prinsip-prinsip ini meliputi:
+
+Individu dan interaksi atas proses dan alat
+Solusi kerja melalui dokumentasi yang komprehensif
+Kolaborasi pelanggan melalui negosiasi kontrak
+Menanggapi perubahan dengan mengikuti rencana
+Praktek Tangkas
+Jelaskan praktik Agile yang diikuti tim Anda. Praktik Agile yang umum meliputi:
+
+Scrum: Kerangka kerja berulang dan bertahap untuk mengelola pekerjaan pengetahuan yang kompleks.
+Kanban: Metode manajemen visual untuk menyeimbangkan permintaan dengan kapasitas yang tersedia.
+Kisah Pengguna: Deskripsi singkat dan sederhana tentang fitur yang diceritakan dari sudut pandang orang yang menginginkan kemampuan baru.
+Standup Harian: Pertemuan harian singkat untuk membahas kemajuan
+
 Postman Export: [Microservice.postman_collection.json](https://github.com/josikie/UTS-Microservice-CRUD-API-PL-SQL-UNSIA/blob/main/Microservice.postman_collection.json)
 
 ## Menyiapkan Proyek di Komputer/Laptop
